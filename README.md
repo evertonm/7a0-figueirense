@@ -18,6 +18,5 @@ Depois acesse `http://127.0.0.1:4173`.
 No Cloudflare Pages, use:
 
 - Framework preset: `None`
-- Build command: vazio
-- Output directory: `/`
-
+- Build command: `exit 0`
+- Output directory: `.`

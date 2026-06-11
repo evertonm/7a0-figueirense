@@ -15,8 +15,8 @@ Depois acesse `http://127.0.0.1:4173`.
 
 ## Publicacao
 
-No Cloudflare Pages, use:
+No fluxo atual de Workers Builds da Cloudflare, use:
 
-- Framework preset: `None`
-- Build command: `exit 0`
-- Output directory: `.`
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Root directory: vazio

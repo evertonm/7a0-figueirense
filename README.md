@@ -18,5 +18,5 @@ Depois acesse `http://127.0.0.1:4173`.
 No fluxo atual de Workers Builds da Cloudflare, use:
 
 - Build command: `npm run build`
-- Deploy command: `npx wrangler deploy`
+- Deploy command: `npm run deploy`
 - Root directory: vazio

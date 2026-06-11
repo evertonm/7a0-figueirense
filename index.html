@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111410">
+  <title>Figueira XI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Figueira XI">
+      <span class="brand-mark">F</span>
+      <span>
+        <strong>FIGUEIRA XI</strong>
+        <small>1970 — 2026</small>
+      </span>
+    </a>
+    <button class="text-button" id="howToPlay">COMO JOGAR</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">MONTE O SEU ALVINEGRO</p>
+      <h1>ONZE ÉPOCAS.<br><em>UM SÓ FIGUEIRA.</em></h1>
+      <p class="intro">
+        Para cada posição, uma temporada. Escolha quem vestiu a camisa
+        e monte um time impossível de atravessar o tempo.
+      </p>
+      <button class="primary-button" id="startGame">
+        <span>COMEÇAR O JOGO</span>
+        <b>→</b>
+      </button>
+      <div class="database-stats">
+        <span><b id="playerCount">1.241</b> jogadores</span>
+        <span><b>57</b> temporadas</span>
+        <span><b>11</b> escolhas</span>
+      </div>
+    </section>
+
+    <section class="game hidden" id="game">
+      <div class="game-head">
+        <div>
+          <p class="eyebrow">SEU TIME ATRAVÉS DA HISTÓRIA</p>
+          <h2>ESCALAÇÃO <span id="progress">0/11</span></h2>
+          <div class="squad-dna" id="squadDna">
+            <span>DNA ALVINEGRO</span>
+            <div><i id="dnaFill"></i></div>
+            <strong id="dnaLabel">COMECE A ESCALAÇÃO</strong>
+          </div>
+        </div>
+        <div class="game-head-actions">
+          <button class="text-button hidden" id="closeTeamView">VOLTAR AO JOGO ×</button>
+          <button class="text-button" id="resetGame">RECOMEÇAR ↻</button>
+        </div>
+      </div>
+
+      <div class="game-layout">
+        <div class="pitch-panel">
+          <div class="pitch" id="pitch" aria-label="Campo com escalação"></div>
+        </div>
+
+        <aside class="choice-panel">
+          <div class="round-label">ESCOLHA ATUAL</div>
+          <div class="roll-panel" id="rollPanel">
+            <div class="game-settings" id="gameSettings">
+              <div class="setting-group">
+                <span>FORMAÇÃO</span>
+                <div class="option-grid formation-options">
+                  <button class="setting-option selected" data-formation="4-3-3">4-3-3</button>
+                  <button class="setting-option" data-formation="4-4-2">4-4-2</button>
+                  <button class="setting-option" data-formation="4-2-3-1">4-2-3-1</button>
+                  <button class="setting-option" data-formation="4-2-4">4-2-4</button>
+                  <button class="setting-option" data-formation="3-5-2">3-5-2</button>
+                  <button class="setting-option" data-formation="5-3-2">5-3-2</button>
+                  <button class="setting-option" data-formation="4-5-1">4-5-1</button>
+                  <button class="setting-option" data-formation="3-4-3">3-4-3</button>
+                </div>
+              </div>
+              <div class="setting-group">
+                <span>ESTILO</span>
+                <div class="option-grid style-options">
+                  <button class="setting-option" data-style="defensivo">Defensivo</button>
+                  <button class="setting-option selected" data-style="equilibrado">Equilibrado</button>
+                  <button class="setting-option" data-style="ofensivo">Ofensivo</button>
+                </div>
+              </div>
+              <div class="setting-group">
+                <span>MODO</span>
+                <div class="option-grid mode-options">
+                  <button class="setting-option selected" data-mode="classico">Clássico</button>
+                  <button class="setting-option" data-mode="almanaque">Almanaque</button>
+                </div>
+              </div>
+            </div>
+            <div class="roll-prompt">
+              Role o dado para sortear<br>
+              uma temporada do Figueira
+            </div>
+            <div class="dice" id="dice" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <button class="roll-button" id="rollDice">
+              <span>ROLAR</span>
+              <b>⚄</b>
+            </button>
+            <small>Rodada <span id="rollRound">1</span> de 11</small>
+          </div>
+
+          <div class="draw-panel hidden" id="drawPanel">
+            <div class="season-box">
+              <span>TEMPORADA SORTEADA</span>
+              <strong id="season">—</strong>
+            </div>
+            <div class="position-box">
+              <span>VAGAS DISPONÍVEIS</span>
+              <strong id="position">QUALQUER POSIÇÃO</strong>
+            </div>
+            <button class="reroll-button" id="rerollSeason">
+              OUTRA TEMPORADA <span id="rerollsLeft">2 CHANCES</span>
+            </button>
+
+            <label class="search-box">
+              <span>⌕</span>
+              <input id="playerSearch" type="search" placeholder="Buscar jogador">
+            </label>
+
+            <div class="player-list" id="playerList"></div>
+
+            <div class="empty-state hidden" id="emptyState">
+              Nenhum jogador encontrado.
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="result hidden" id="result">
+      <p class="eyebrow" id="matchProgress">JOGO 1/7</p>
+      <h2 id="stageTitle">FASE DE<br><em>GRUPOS.</em></h2>
+      <div class="tournament-track" id="tournamentTrack"></div>
+      <div class="match-control">
+        <div class="match-clock">
+          <span id="matchStatus">BOLA ROLANDO</span>
+          <strong id="matchMinute">00'</strong>
+        </div>
+        <div class="speed-control">
+          <span>VELOCIDADE</span>
+          <button class="speed-button selected" data-speed="1">1×</button>
+          <button class="speed-button" data-speed="2">2×</button>
+          <button class="speed-button" data-speed="4">4×</button>
+        </div>
+      </div>
+      <div class="scoreboard">
+        <div>
+          <span>FIGUEIRA XI</span>
+          <strong id="homeScore">0</strong>
+        </div>
+        <i>×</i>
+        <div>
+          <span id="opponentLabel">FIGUEIRENSE</span>
+          <strong id="awayScore">0</strong>
+        </div>
+      </div>
+      <div class="goal-timeline">
+        <div class="timeline-head">
+          <span>FIGUEIRA XI</span>
+          <b>LINHA DO TEMPO</b>
+          <span id="awayScorersLabel">FIGUEIRENSE</span>
+        </div>
+        <div class="timeline-events" id="goalTimeline"></div>
+      </div>
+      <div class="penalties hidden" id="penalties">
+        <div class="penalty-head">
+          <span>DISPUTA POR PÊNALTIS</span>
+          <strong id="penaltyScore"></strong>
+        </div>
+        <div class="penalty-live" id="penaltyLive" aria-live="polite">
+          <span class="kick-icon pending">•</span>
+          <strong>PREPARANDO A PRIMEIRA COBRANÇA</strong>
+        </div>
+        <div class="penalty-columns">
+          <div>
+            <span>FIGUEIRA XI</span>
+            <ul id="homePenalties"></ul>
+          </div>
+          <div>
+            <span id="awayPenaltiesLabel">FIGUEIRENSE</span>
+            <ul id="awayPenalties"></ul>
+          </div>
+        </div>
+      </div>
+      <p class="group-summary hidden" id="groupSummary"></p>
+      <div class="match-star hidden" id="matchStar">
+        <span>CRAQUE DO JOGO</span>
+        <strong id="matchStarName">—</strong>
+        <small id="matchStarReason"></small>
+      </div>
+      <p class="result-copy" id="resultCopy"></p>
+      <section class="campaign-card-wrap hidden" id="campaignCardWrap">
+        <article class="campaign-card" id="campaignCard">
+          <header class="campaign-card-head">
+            <div class="campaign-brand">
+              <b>F</b>
+              <span>FIGUEIRA XI<small>1970 — 2026</small></span>
+            </div>
+            <code id="campaignCode">#FFC000</code>
+          </header>
+          <div class="campaign-outcome">
+            <span id="campaignStatus">ELIMINADO</span>
+            <strong id="campaignRecord">3–1</strong>
+            <small id="campaignStage">QUARTAS DE FINAL</small>
+          </div>
+          <div class="campaign-stats">
+            <div><strong id="campaignGoalsFor">0</strong><span>GOLS PRÓ</span></div>
+            <div><strong id="campaignGoalsAgainst">0</strong><span>SOFRIDOS</span></div>
+            <div><strong id="campaignOverall">0</strong><span>OVERALL</span></div>
+            <div><strong id="campaignWins">0</strong><span>VITÓRIAS</span></div>
+          </div>
+          <ol class="campaign-lineup" id="campaignLineup"></ol>
+          <footer>figueiraxi.com.br · monte o seu</footer>
+        </article>
+        <div class="campaign-share-actions">
+          <button class="primary-button" id="shareCampaignImage">COMPARTILHAR IMAGEM</button>
+          <button class="secondary-button" id="shareCampaignLink">COMPARTILHAR LINK</button>
+        </div>
+        <p class="share-feedback hidden" id="shareFeedback"></p>
+      </section>
+      <div class="result-actions">
+        <button class="primary-button" id="nextMatch">PRÓXIMO JOGO <b>→</b></button>
+        <button class="secondary-button hidden" id="playAgain">NOVO TORNEIO</button>
+        <button class="secondary-button" id="viewTeam">VER ESCALAÇÃO</button>
+      </div>
+      <p class="rating-note">
+        Overalls editoriais consideram a temporada do Figueira, protagonismo,
+        continuidade no clube e carreira. O indicador mostra a confiança da avaliação.
+      </p>
+    </section>
+  </main>
+
+  <dialog id="rulesDialog">
+    <button class="dialog-close" id="closeRules" aria-label="Fechar">×</button>
+    <p class="eyebrow">COMO JOGAR</p>
+    <h2>CRUZE AS ÉPOCAS</h2>
+    <ol>
+      <li>O jogo sorteia uma temporada a cada rodada.</li>
+      <li>Clique em Rolar para revelar o ano antes de escolher.</li>
+      <li>Escolha qualquer atleta daquele elenco com vaga disponível.</li>
+      <li>O mesmo jogador não pode aparecer duas vezes.</li>
+      <li>A formação define os setores e o estilo muda as funções táticas.</li>
+      <li>Você possui duas chances para trocar a temporada sorteada.</li>
+      <li>Misturar mais décadas aumenta o DNA Alvinegro e dá um pequeno bônus ao time.</li>
+      <li>No modo Almanaque, os Overalls ficam ocultos.</li>
+      <li>Dispute 3 jogos de grupos, oitavas, quartas, semifinal e final.</li>
+      <li>Empates no mata-mata são decididos nos pênaltis.</li>
+    </ol>
+  </dialog>
+
+  <script src="players.js"></script>
+  <script src="player-roles.js"></script>
+  <script src="transfermarkt-roles.js"></script>
+  <script src="player-ratings.js"></script>
+  <script src="formation-layouts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
